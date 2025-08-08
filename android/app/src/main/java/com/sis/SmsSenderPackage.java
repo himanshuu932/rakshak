@@ -16,6 +16,9 @@ public class SmsSenderPackage implements ReactPackage {
         modules.add(new SmsSenderModule(reactContext));
         // ADD THIS LINE
         modules.add(new SettingsModule(reactContext)); 
+        // inside createNativeModules (or getPackages), add:
+        modules.add(new SisterSettingsModule(reactContext));
+
         return modules;
     }
 
