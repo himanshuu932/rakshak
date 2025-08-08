@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function SisterStack({ resetMode }) {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SisterHome">
+      <Stack.Screen name="Rakshak">
         {(props) => <SisterHome {...props} resetMode={resetMode} />}
       </Stack.Screen>
     </Stack.Navigator>
