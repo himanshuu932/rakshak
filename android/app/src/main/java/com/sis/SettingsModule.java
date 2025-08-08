@@ -1,3 +1,4 @@
+// SettingsModule.java
 package com.sis;
 
 import android.content.SharedPreferences;
@@ -8,8 +9,7 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class SettingsModule extends ReactContextBaseJavaModule {
     private static final String PREFS_NAME = "ResponderSettings";
-    private static final String KEY_NUMBER = "trusted_number";
-    private static final String KEY_KEYWORD = "secret_keyword";
+    private static final String KEY_TRUSTED_LIST = "trusted_list"; // JSON array string
     private final SharedPreferences prefs;
 
     public SettingsModule(ReactApplicationContext reactContext) {
@@ -22,13 +22,18 @@ public class SettingsModule extends ReactContextBaseJavaModule {
         return "SettingsModule";
     }
 
+    /**
+     * Replace the whole trusted list. `jsonList` should be a JSON array string
+     * like: [{"phone":"+9112345","keyword":"CODE1"},{"phone":"+9199999","keyword":"SIS"}]
+     */
     @ReactMethod
-    public void setTrustedNumber(String number) {
-        prefs.edit().putString(KEY_NUMBER, number).apply();
+    public void setTrustedList(String jsonList) {
+        prefs.edit().putString(KEY_TRUSTED_LIST, jsonList).apply();
     }
 
+    // Optional helper methods (not required by JS, but kept for completeness)
     @ReactMethod
-    public void setSecretKeyword(String keyword) {
-        prefs.edit().putString(KEY_KEYWORD, keyword).apply();
+    public void clearTrustedList() {
+        prefs.edit().remove(KEY_TRUSTED_LIST).apply();
     }
 }
